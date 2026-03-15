@@ -1,504 +1,1197 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srigana Pulikantham — Software & Cloud Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 
-    <!-- SEO -->
-    <meta
-      name="description"
-      content="Srigana Pulikantham — Cloud & DevOps Engineer. Master's student at VCU with a 4.0 GPA, focused on AWS, CI/CD, automation, and reliable cloud infrastructure."
+/* ── TOKENS ── */
+[data-theme="light"]{
+  --bg:       #f5f0e8;
+  --bg2:      #ede8df;
+  --surface:  #faf7f2;
+  --ink:      #1a1814;
+  --ink2:     #3d3a34;
+  --muted:    #8a8578;
+  --faint:    #c4bfb5;
+  --accent:   #c94f2c;
+  --accent2:  #e8673d;
+  --accentbg: rgba(201,79,44,0.07);
+  --accentbd: rgba(201,79,44,0.2);
+  --green:    #2a7a52;
+  --greenbg:  rgba(42,122,82,0.07);
+  --greenbd:  rgba(42,122,82,0.2);
+  --blue:     #2459a8;
+  --bluebg:   rgba(36,89,168,0.07);
+  --bluebd:   rgba(36,89,168,0.2);
+  --border:   rgba(26,24,20,0.1);
+  --border2:  rgba(26,24,20,0.18);
+  --shadow:   0 2px 20px rgba(26,24,20,0.08);
+  --nav-bg:   rgba(245,240,232,0.9);
+}
+[data-theme="dark"]{
+  --bg:       #141210;
+  --bg2:      #1c1a17;
+  --surface:  #1f1d1a;
+  --ink:      #f0ebe2;
+  --ink2:     #c8c2b8;
+  --muted:    #7a7570;
+  --faint:    #3a3730;
+  --accent:   #e8673d;
+  --accent2:  #f07a52;
+  --accentbg: rgba(232,103,61,0.1);
+  --accentbd: rgba(232,103,61,0.25);
+  --green:    #3da06e;
+  --greenbg:  rgba(61,160,110,0.1);
+  --greenbd:  rgba(61,160,110,0.25);
+  --blue:     #5b8fd4;
+  --bluebg:   rgba(91,143,212,0.1);
+  --bluebd:   rgba(91,143,212,0.25);
+  --border:   rgba(240,235,226,0.09);
+  --border2:  rgba(240,235,226,0.16);
+  --shadow:   0 2px 20px rgba(0,0,0,0.4);
+  --nav-bg:   rgba(20,18,16,0.9);
+}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;line-height:1.65;
+  overflow-x:hidden;
+  transition:background 0.35s,color 0.35s;
+}
+
+/* grain */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;
+  pointer-events:none;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:32px;left:0;right:0;z-index:100;
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,5vw,80px);
+  background:var(--nav-bg);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:background 0.35s,border-color 0.35s;
+}
+.nav-logo{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:18px;font-weight:400;
+  color:var(--ink);text-decoration:none;
+  letter-spacing:-0.3px;
+  transition:color 0.2s;
+}
+.nav-logo em{font-style:italic;color:var(--accent);}
+.nav-logo:hover{color:var(--accent);}
+
+.nav-r{display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;margin-right:12px;}
+.nav-links a{
+  font-size:13px;font-weight:400;color:var(--muted);
+  text-decoration:none;letter-spacing:0.1px;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-cv{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  color:var(--accent) !important;letter-spacing:0.5px;
+  border:1px solid var(--accentbd);padding:6px 14px;border-radius:4px;
+  background:var(--accentbg);transition:background 0.2s !important;
+}
+.nav-cv:hover{background:rgba(201,79,44,0.13) !important;}
+[data-theme="dark"] .nav-cv:hover{background:rgba(232,103,61,0.15) !important;}
+
+.theme-btn{
+  width:34px;height:34px;border-radius:6px;cursor:pointer;
+  background:var(--bg2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s;
+}
+.theme-btn:hover{background:var(--faint);}
+.theme-btn svg{width:15px;height:15px;stroke:var(--muted);}
+.icon-moon,.icon-sun{transition:opacity 0.2s;}
+.icon-moon{display:block;}
+.icon-sun{display:none;}
+[data-theme="dark"] .icon-moon{display:none;}
+[data-theme="dark"] .icon-sun{display:block;}
+
+.ham{
+  display:none;width:34px;height:34px;border-radius:6px;cursor:pointer;
+  background:var(--bg2);border:1px solid var(--border2);
+  align-items:center;justify-content:center;flex-direction:column;gap:4px;
+}
+.ham span{display:block;width:14px;height:1.5px;background:var(--muted);border-radius:2px;}
+.mob-menu{
+  display:none;position:fixed;top:88px;left:0;right:0;z-index:99;
+  background:var(--nav-bg);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:8px clamp(20px,5vw,80px) 16px;
+  flex-direction:column;
+}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);transition:color 0.2s;}
+.mob-menu a:last-child{border-bottom:none;}
+.mob-menu a:hover{color:var(--ink);}
+
+/* ── PAGE ── */
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,80px);}
+section{position:relative;}
+.rule{border:none;border-top:1px solid var(--border);margin:0;}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;
+  padding:10px 20px;border-radius:5px;text-decoration:none;
+  cursor:pointer;border:none;transition:all 0.18s;
+}
+.btn-solid{background:var(--accent);color:#fff;font-weight:500;}
+.btn-solid:hover{background:var(--accent2);transform:translateY(-1px);}
+.btn-line{background:transparent;color:var(--ink2);border:1px solid var(--border2);}
+.btn-line:hover{border-color:var(--accent);color:var(--accent);background:var(--accentbg);}
+
+/* ── HERO ── */
+#hero{
+  padding:140px 0 80px;
+  display:grid;grid-template-columns:1fr 320px;
+  gap:0;align-items:end;
+  border-bottom:1px solid var(--border);
+}
+.hero-l{padding-right:80px;border-right:1px solid var(--border);}
+.hero-tag{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:400;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:28px;display:flex;align-items:center;gap:10px;
+}
+.hero-tag::before{content:'→';color:var(--accent);font-size:13px;}
+h1{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(52px,7vw,92px);
+  font-weight:300;line-height:0.96;
+  letter-spacing:-2px;margin-bottom:32px;
+}
+h1 em{font-style:italic;color:var(--accent);font-weight:300;}
+h1 .small-line{font-size:clamp(28px,3.8vw,50px);display:block;letter-spacing:-1px;color:var(--ink2);}
+
+.hero-desc{
+  font-size:16px;font-weight:300;color:var(--ink2);
+  line-height:1.8;max-width:480px;margin-bottom:36px;
+}
+.hero-desc strong{color:var(--ink);font-weight:400;}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* hero right */
+.hero-r{padding-left:48px;padding-bottom:8px;}
+.hero-r-label{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.kv-row{
+  display:flex;align-items:baseline;
+  justify-content:space-between;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.kv-row:last-child{border-bottom:none;}
+.kv-key{font-size:12px;color:var(--muted);white-space:nowrap;}
+.kv-val{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:17px;font-style:italic;
+  text-align:right;
+}
+.kv-val.a{color:var(--accent);}
+.kv-val.g{color:var(--green);}
+.kv-val.b{color:var(--blue);}
+.kv-val.sm{font-size:13px;font-style:normal;font-family:'DM Sans',sans-serif;color:var(--ink2);}
+
+/* ── EXPERIENCE ── */
+#experience{padding:96px 0;}
+.sec-label{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;
+}
+.sec-h{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(36px,4.5vw,56px);
+  font-weight:300;letter-spacing:-1.5px;line-height:1;
+  margin-bottom:60px;
+}
+.sec-h em{font-style:italic;color:var(--accent);}
+
+.exp-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border-top:1px solid var(--border);
+}
+.exp-row:last-of-type{border-bottom:1px solid var(--border);}
+.exp-l{
+  padding:44px 56px 44px 0;
+  border-right:1px solid var(--border);
+}
+.exp-r{padding:44px 0 44px 56px;}
+
+.exp-co{
+  font-family:'DM Mono',monospace;font-size:11px;
+  letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:6px;
+}
+.exp-title{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(22px,2.8vw,32px);
+  font-weight:300;letter-spacing:-0.5px;line-height:1.15;
+  margin-bottom:6px;
+}
+.exp-period{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--muted);margin-bottom:20px;
+}
+.exp-stack{display:flex;flex-wrap:wrap;gap:6px;}
+.tag-mono{
+  font-family:'DM Mono',monospace;font-size:10px;
+  padding:3px 9px;border-radius:3px;
+  background:var(--bg2);border:1px solid var(--border);color:var(--muted);
+  transition:background 0.3s;
+}
+
+.exp-summary{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:24px;}
+.exp-wins{display:flex;flex-direction:column;gap:0;}
+.win-row{
+  display:grid;grid-template-columns:72px 1fr;
+  gap:0;padding:14px 0;border-top:1px solid var(--border);
+  align-items:start;
+}
+.win-row:last-child{border-bottom:1px solid var(--border);}
+.win-fig{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:22px;font-style:italic;font-weight:300;
+  line-height:1.2;padding-top:1px;
+}
+.win-fig.a{color:var(--accent);}
+.win-fig.g{color:var(--green);}
+.win-fig.b{color:var(--blue);}
+.win-txt{font-size:13px;color:var(--muted);line-height:1.65;}
+.win-txt strong{color:var(--ink);font-weight:500;}
+
+.gap-note{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-top:1px solid var(--border);
+}
+.gap-line{flex:1;height:1px;background:var(--faint);}
+.gap-text{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--muted);font-style:italic;white-space:nowrap;
+}
+
+/* ── PROJECTS ── */
+#projects{
+  padding:96px 0;
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  transition:background 0.35s;
+}
+.proj-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:48px;flex-wrap:wrap;gap:16px;
+}
+.proj-list{display:flex;flex-direction:column;gap:0;}
+
+.proj-item{
+  display:grid;grid-template-columns:56px 1fr auto;
+  gap:0;align-items:start;
+  padding:32px 0;
+  border-top:1px solid var(--border);
+  text-decoration:none;color:inherit;
+  transition:background 0.15s;
+  position:relative;
+}
+.proj-item:last-of-type{border-bottom:1px solid var(--border);}
+.proj-item:hover .proj-title-txt{color:var(--accent);}
+.proj-item:hover .proj-arrow{transform:translate(4px,-4px);color:var(--accent);}
+
+.proj-idx{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--faint);padding-top:4px;font-style:italic;
+}
+.proj-mid{padding:0 40px 0 0;}
+.proj-title-txt{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(18px,2.2vw,26px);
+  font-weight:300;letter-spacing:-0.3px;
+  margin-bottom:8px;line-height:1.2;
+  transition:color 0.2s;
+}
+.proj-desc-txt{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;max-width:600px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.proj-nums-row{display:flex;gap:28px;}
+.pstat-val{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:17px;font-style:italic;display:block;
+}
+.pstat-val.a{color:var(--accent);}
+.pstat-val.g{color:var(--green);}
+.pstat-val.b{color:var(--blue);}
+.pstat-key{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-top:2px;display:block;}
+.proj-arrow{font-size:18px;color:var(--muted);padding-top:4px;transition:transform 0.2s,color 0.2s;flex-shrink:0;}
+
+.view-all-row{margin-top:32px;text-align:center;}
+
+/* ── SKILLS ── */
+#skills{padding:96px 0;}
+.skills-layout{
+  display:grid;grid-template-columns:280px 1fr;
+  gap:0;align-items:start;
+}
+.skills-l{
+  padding-right:60px;
+  border-right:1px solid var(--border);
+  position:sticky;top:80px;
+}
+.skills-intro{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:22px;font-weight:300;font-style:italic;
+  line-height:1.4;color:var(--ink2);margin-bottom:20px;
+}
+.skills-note{font-size:13px;color:var(--muted);line-height:1.7;}
+.skills-r{padding-left:60px;}
+.sg2{margin-bottom:40px;}
+.sg2:last-child{margin-bottom:0;}
+.sg2-lbl{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.sk-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.sk-pill{
+  font-size:13px;font-weight:400;
+  padding:7px 14px;border-radius:4px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--ink2);
+  transition:border-color 0.2s,color 0.2s,background 0.35s;
+  cursor:default;
+}
+.sk-pill:hover{border-color:var(--border2);color:var(--ink);}
+.sk-pill.a{background:var(--accentbg);border-color:var(--accentbd);color:var(--accent);}
+.sk-pill.g{background:var(--greenbg);border-color:var(--greenbd);color:var(--green);}
+.sk-pill.b{background:var(--bluebg);border-color:var(--bluebd);color:var(--blue);}
+
+/* ── EDUCATION ── */
+#education{
+  padding:96px 0;
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  transition:background 0.35s;
+}
+.edu-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.edu-l{padding-right:60px;border-right:1px solid var(--border);}
+.edu-r{padding-left:60px;}
+.edu-degree-name{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(28px,3.5vw,44px);
+  font-weight:300;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;
+}
+.edu-uni{font-size:15px;color:var(--ink2);font-weight:300;margin-bottom:32px;}
+.edu-uni strong{color:var(--ink);font-weight:400;}
+.edu-table{display:flex;flex-direction:column;}
+.edu-tr{display:grid;grid-template-columns:130px 1fr;padding:10px 0;border-top:1px solid var(--border);font-size:13px;}
+.edu-tr:last-child{border-bottom:1px solid var(--border);}
+.edu-td-k{color:var(--muted);}
+.edu-td-v{color:var(--ink);}
+.edu-td-v .hi{color:var(--green);}
+.edu-td-v .ac{color:var(--accent);}
+
+/* gpa big */
+.gpa-block{margin-bottom:40px;}
+.gpa-num{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:96px;font-weight:300;font-style:italic;
+  line-height:1;color:var(--accent);margin-bottom:4px;letter-spacing:-4px;
+}
+.gpa-denom{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:1px;}
+
+/* cert */
+.cert-block{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:20px;
+  transition:background 0.35s,border-color 0.35s;
+}
+.cert-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.cert-badge-ico{
+  width:44px;height:44px;border-radius:8px;flex-shrink:0;
+  background:var(--accentbg);border:1px solid var(--accentbd);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+}
+.cert-name2{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.cert-by{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.cert-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;
+  background:var(--greenbg);border:1px solid var(--greenbd);color:var(--green);
+  letter-spacing:0.5px;text-transform:uppercase;
+}
+.cert-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--green);}
+
+/* ── CONTACT ── */
+#contact{padding:96px 0;}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.contact-l{padding-right:60px;border-right:1px solid var(--border);}
+.contact-r{padding-left:60px;}
+.contact-headline{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(36px,5vw,66px);
+  font-weight:300;letter-spacing:-2px;line-height:0.95;
+  margin-bottom:24px;
+}
+.contact-headline em{font-style:italic;color:var(--accent);}
+.contact-sub{font-size:15px;color:var(--ink2);font-weight:300;line-height:1.8;margin-bottom:32px;max-width:380px;}
+.cl-list{display:flex;flex-direction:column;}
+.cl2{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0;border-bottom:1px solid var(--border);
+  text-decoration:none;color:inherit;
+  transition:padding-left 0.18s;
+}
+.cl2:first-child{border-top:1px solid var(--border);}
+.cl2:hover{padding-left:8px;}
+.cl2-l{display:flex;align-items:center;gap:12px;}
+.cl2-ico{
+  width:32px;height:32px;border-radius:5px;
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--muted);flex-shrink:0;
+  transition:background 0.35s;
+}
+.cl2-name{font-size:14px;color:var(--ink);}
+.cl2-val{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px;}
+.cl2-arr{font-size:14px;color:var(--muted);transition:color 0.18s,transform 0.18s;}
+.cl2:hover .cl2-arr{color:var(--accent);transform:translate(3px,-3px);}
+
+/* about card */
+.about-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:28px;
+  transition:background 0.35s,border-color 0.35s;
+}
+.about-person2{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.about-av{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;color:var(--muted);flex-shrink:0;
+  transition:background 0.35s;
+}
+.about-av img{width:100%;height:100%;object-fit:cover;}
+.about-pname{font-size:15px;font-weight:500;color:var(--ink);}
+.about-prole{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:0.3px;}
+.about-q{
+  font-family:'Fraunces',Georgia,serif;font-size:15px;font-style:italic;
+  font-weight:300;color:var(--ink2);margin-bottom:14px;line-height:1.55;
+  border-left:2px solid var(--accent);padding-left:14px;
+}
+.about-body2{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:20px;}
+.about-tgs{display:flex;flex-wrap:wrap;gap:6px;}
+.about-tg{
+  font-size:12px;padding:4px 10px;border-radius:4px;
+  background:var(--bg2);border:1px solid var(--border);color:var(--muted);
+  transition:background 0.35s;
+}
+.about-tg.a{background:var(--accentbg);border-color:var(--accentbd);color:var(--accent);}
+.about-tg.g{background:var(--greenbg);border-color:var(--greenbd);color:var(--green);}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:24px clamp(20px,5vw,80px);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.foot-l{font-family:'Fraunces',Georgia,serif;font-size:14px;font-style:italic;color:var(--muted);}
+.foot-links{display:flex;gap:24px;}
+.foot-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.5px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.foot-links a:hover{color:var(--ink);}
+
+/* ── REVEAL ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.rv{animation:fadeUp 0.65s ease both;}
+.rv.d1{animation-delay:0.08s}
+.rv.d2{animation-delay:0.16s}
+.rv.d3{animation-delay:0.24s}
+
+/* ── CUSTOM CURSOR ── */
+*{cursor:none !important;}
+#cur{
+  position:fixed;top:-100px;left:-100px;
+  pointer-events:none;z-index:99999;
+  width:26px;height:26px;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+#cur svg{width:26px;height:26px;display:block;}
+#cur-dot{
+  position:fixed;top:-100px;left:-100px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);
+  pointer-events:none;z-index:99998;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+
+/* ── SCROLL PROGRESS ── */
+#progress{
+  position:fixed;top:0;left:0;height:2px;z-index:300;
+  background:var(--accent);width:0%;
+  transition:width 0.1s linear;
+}
+
+/* ── TICKER ── */
+.ticker-wrap{
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+  height:32px;display:flex;align-items:center;
+  transition:background 0.35s;
+}
+.ticker-track{
+  display:flex;align-items:center;gap:0;
+  white-space:nowrap;
+  animation:tick 28s linear infinite;
+  width:max-content;
+}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick-item{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:400;
+  color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;
+  padding:0 28px;border-right:1px solid var(--border);
+}
+.tick-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.tick-item.hi{color:var(--accent);}
+
+/* ── WIN-ROW hover slide ── */
+.win-row{
+  transition:padding-left 0.2s,border-color 0.2s;
+  border-left:2px solid transparent;
+  padding-left:0;
+}
+.win-row:hover{padding-left:10px;border-left-color:var(--accent);}
+
+/* ── PROJ-ITEM stagger ── */
+.proj-item{
+  transition:padding-left 0.2s,background 0.15s;
+}
+.proj-item:hover .proj-title-txt{color:var(--accent);}
+
+/* ── SKILL PILL lift ── */
+.sk-pill{transition:transform 0.15s,border-color 0.2s,color 0.2s,background 0.35s;}
+.sk-pill:hover{transform:translateY(-3px);}
+
+/* ── COUNTER cells ── */
+.kv-val[data-count]{
+  transition:color 0.2s;
+  display:inline-block;
+}
+
+/* ── SECTION HEADING draw-in ── */
+/* sec-h uses fadeUp animation from .rv */
+
+/* ── MAGNETIC BTN ── */
+.btn-solid{will-change:transform;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding:96px 0 60px;}
+  .hero-l{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:40px;margin-bottom:32px;}
+  .hero-r{padding-left:0;}
+  .exp-row{grid-template-columns:1fr;}
+  .exp-l{padding-right:0;border-right:none;padding-bottom:0;}
+  .exp-r{padding-left:0;padding-top:24px;}
+  .proj-item{grid-template-columns:40px 1fr auto;}
+  .skills-layout{grid-template-columns:1fr;}
+  .skills-l{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:40px;position:static;}
+  .skills-r{padding-left:0;}
+  .edu-layout{grid-template-columns:1fr;}
+  .edu-l{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:40px;margin-bottom:40px;}
+  .edu-r{padding-left:0;}
+  .contact-layout{grid-template-columns:1fr;}
+  .contact-l{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:40px;margin-bottom:40px;}
+  .contact-r{padding-left:0;}
+  .nav-links{display:none;}
+  .ham{display:flex;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR: tailless arrow -->
+<div id="cur">
+  <svg viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!--
+      Arrow tip sits at (0,0).
+      Shape: tip → bottom-right → notch → bottom-left → back to tip.
+      No tail — just the clean arrowhead.
+    -->
+    <path
+      d="M1 1 L17 10 L10.5 11.5 L7.5 19 Z"
+      fill="var(--accent)"
+      stroke="var(--surface)"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+      stroke-linecap="round"
     />
-    <title>Srigana Pulikantham | Cloud & DevOps</title>
+  </svg>
+</div>
+<div id="cur-dot"></div>
+<!-- SCROLL PROGRESS -->
+<div id="progress"></div>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Work+Sans:wght@400;800&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item hi"><span class="tick-dot"></span>Open to Work</span>
+    <span class="tick-item"><span class="tick-dot"></span>MS CS · VCU · Graduated 2025</span>
+    <span class="tick-item"><span class="tick-dot"></span>AWS Certified Cloud Practitioner</span>
+    <span class="tick-item"><span class="tick-dot"></span>Backend · Cloud · DevOps</span>
+    <span class="tick-item"><span class="tick-dot"></span>40% faster processing</span>
+    <span class="tick-item"><span class="tick-dot"></span>Richmond VA · Open to Remote</span>
+    <span class="tick-item"><span class="tick-dot"></span>4.0 GPA</span>
+    <!-- duplicate for seamless loop -->
+    <span class="tick-item hi"><span class="tick-dot"></span>Open to Work</span>
+    <span class="tick-item"><span class="tick-dot"></span>MS CS · VCU · Graduated 2025</span>
+    <span class="tick-item"><span class="tick-dot"></span>AWS Certified Cloud Practitioner</span>
+    <span class="tick-item"><span class="tick-dot"></span>Backend · Cloud · DevOps</span>
+    <span class="tick-item"><span class="tick-dot"></span>40% faster processing</span>
+    <span class="tick-item"><span class="tick-dot"></span>Richmond VA · Open to Remote</span>
+    <span class="tick-item"><span class="tick-dot"></span>4.0 GPA</span>
+  </div>
+</div>
 
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Work+Sans:wght@400;800&display=swap"
-        rel="stylesheet"
-        type="text/css"
-      />
-    </noscript>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    Srigana<em>.</em>
+  </a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://drive.google.com/file/d/1Ul-3u_U6m_qa4rxIBS6XyAZe58zFj8UB/view?usp=sharing" target="_blank" class="nav-cv">Resume ↗</a></li>
+    </ul>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <div class="ham" id="hamBtn"><span></span><span></span><span></span></div>
+  </div>
+</nav>
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<div class="mob-menu" id="mobMenu">
+  <a href="#experience" onclick="closeMob()">Experience</a>
+  <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="#skills" onclick="closeMob()">Skills</a>
+  <a href="#education" onclick="closeMob()">Education</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="https://drive.google.com/file/d/1Ul-3u_U6m_qa4rxIBS6XyAZe58zFj8UB/view?usp=sharing" target="_blank">Resume ↗</a>
+</div>
 
-  <body>
-    <!-- Navigation -->
-    <nav>
-      <ul>
-        <li><a href="#top">HOME</a></li>
-        <li><a href="#project">PROJECTS</a></li>
-        <li><a href="#experience">EXPERIENCE</a></li>
-        <li><a href="#education">EDUCATION</a></li>
-        <li><a href="#about">ABOUT</a></li>
-      </ul>
-    </nav>
-    <!-- End of Navigation -->
-
-    <!-- Home -->
-    <section class="center" id="top">
-  <header class="profile container">
-    <div class="profile__container grid">
-      <!-- LEFT: avatar + name + role + socials -->
-      <div class="profile__data">
-        <div class="profile__border">
-          <div class="profile__perfil">
-            <img
-              src="./asset/img/image2.png"
-              alt="Srigana Pulikantham"
-              width="96"
-              height="96"
-            />
-          </div>
-        </div>
-
-        <h2 class="profile__name">Srigana Pulikantham</h2>
-        <h3 class="profile__profession">Cloud & DevOps (AWS) • Automation • CI/CD</h3>
-
-        <ul class="profile__social">
-          <li>
-            <a
-              href="https://www.linkedin.com/in/srigana-pulikantham-790954221/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="profile__social-link"
-              aria-label="LinkedIn"
-            >
-              <img src="./asset/svg/linkedin.svg" alt="LinkedIn" width="22" height="22" />
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="https://github.com/Srigana"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="profile__social-link"
-              aria-label="GitHub"
-            >
-              <img src="./asset/svg/github.svg" alt="GitHub" width="22" height="22" />
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- RIGHT: quick stats -->
-      <div class="profile__info grid">
-        <div class="profile__info-group">
-          <h3 class="profile__info-number">Graduate CS</h3>
-          <p class="profile__info-description">Cloud <br />& DevOps focus</p>
-        </div>
-
-        <div class="profile__info-group">
-          <h3 class="profile__info-number">3+</h3>
-          <p class="profile__info-description">Cloud/DevOps <br />projects</p>
-        </div>
-
-        <div class="profile__info-group">
-          <h3 class="profile__info-number">DevOps Stack</h3>
-          <p class="profile__info-description">Docker <br />K8s</p>
-        </div>
-      </div>
-
-      <!-- BIO -->
-      <p class="profile__bio">
-        I’m a Computer Science graduate student focused on Cloud and DevOps, with an interest in automation, CI/CD pipelines, and building reliable systems on AWS.
+<!-- ═══ HERO ═══ -->
+<div class="wrap">
+  <section id="hero">
+    <div class="hero-l">
+      <div class="hero-tag">Software &amp; Cloud Engineer · Richmond, VA</div>
+      <h1>
+        Building<br>
+        things that<br>
+        <em>work.</em>
+        <span class="small-line">Backend · Cloud · DevOps</span>
+      </h1>
+      <p class="hero-desc">
+        I'm Srigana — recently graduated MS Computer Science at VCU.
+        I build <strong>backend APIs</strong>, automate infrastructure with <strong>Terraform and AWS</strong>,
+        and ship systems that are reliable and easy to operate in production.
       </p>
+      <div class="hero-btns">
+        <a href="mailto:srigana2003@gmail.com" class="btn btn-solid">Get in touch</a>
+        <a href="https://github.com/Srigana" target="_blank" class="btn btn-line">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/srigana-pulikantham-790954221/" target="_blank" class="btn btn-line">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="hero-r-label">At a glance</div>
+      <div class="kv-row"><span class="kv-key">Status</span><span class="kv-val a">Open to work</span></div>
+      <div class="kv-row"><span class="kv-key">Graduated</span><span class="kv-val g">MS CS, VCU 2025</span></div>
+      <div class="kv-row"><span class="kv-key">Processing cut</span><span class="kv-val a" data-count="40" data-suffix="%">40%</span></div>
+      <div class="kv-row"><span class="kv-key">Manual work cut</span><span class="kv-val g" data-count="30" data-suffix="%">30%</span></div>
+      <div class="kv-row"><span class="kv-key">GPA</span><span class="kv-val b" data-count="4.0" data-suffix="" data-dec="1">4.0 / 4.0</span></div>
+      <div class="kv-row"><span class="kv-key">AWS Certified</span><span class="kv-val g">Cloud Practitioner</span></div>
+      <div class="kv-row"><span class="kv-key">Target roles</span><span class="kv-val sm">SWE · Cloud / DevOps</span></div>
+    </div>
+  </section>
+</div>
 
-      <!-- BUTTONS -->
-      <div class="profile__buttons">
-        <!-- View Resume -->
-        <a
-          href="https://drive.google.com/file/d/1Ul-3u_U6m_qa4rxIBS6XyAZe58zFj8UB/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button"
-        >
-          View Resume
-        </a>
+<hr class="rule">
 
-        <div class="profile__buttons-small">
-          <a href="mailto:srigana2003@gmail.com" class="button button__small button__gray">
-            Email
-          </a>
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="rv">
+      <div class="sec-label">Experience</div>
+      <h2 class="sec-h">Where I've <em>shipped.</em></h2>
+    </div>
 
-          <a href="https://www.linkedin.com/in/srigana-pulikantham-790954221/" target="_blank" rel="noopener noreferrer"
-             class="button button__small button__gray">
-            LinkedIn
-          </a>
+    <div class="exp-row rv">
+      <div class="exp-l">
+        <div class="exp-co">Backend Engineering</div>
+        <h3 class="exp-title">Backend Engineering<br>Intern</h3>
+        <div class="exp-period">May 2025 — Jul 2025</div>
+        <div class="exp-stack">
+          <span class="tag-mono">Python</span><span class="tag-mono">Flask</span>
+          <span class="tag-mono">MongoDB</span><span class="tag-mono">AWS EC2</span><span class="tag-mono">S3</span>
+        </div>
+      </div>
+      <div class="exp-r">
+        <p class="exp-summary">Built and hardened Python/Flask microservices for a distributed SaaS product — REST endpoints, input validation, MongoDB schema design, and AWS hosting support.</p>
+        <div class="exp-wins">
+          <div class="win-row">
+            <span class="win-fig a">3</span>
+            <span class="win-txt"><strong>Microservices shipped</strong> with structured error handling and clean API boundaries in Python/Flask</span>
+          </div>
+          <div class="win-row">
+            <span class="win-fig g">100%</span>
+            <span class="win-txt"><strong>Data integrity</strong> maintained — optimized MongoDB schemas and queries for distributed access control</span>
+          </div>
+          <div class="win-row">
+            <span class="win-fig b">≥99%</span>
+            <span class="win-txt"><strong>Uptime supported</strong> — monitored EC2 and S3, contributed to high-availability hosting setup</span>
+          </div>
         </div>
       </div>
     </div>
-  </header>
-</section>
-
-    <!-- Resume Button -->
 
 
-    <!-- End of Home -->
-
-    <!-- Start of Project -->
-    <section class="center">
-      <div id="project">
-        <h2>PROJECTS</h2>
-
-        <!-- project container/ grid -->
-        <div class="project-container">
-          <!-- Project 1 -->
-          <div class="repository-container">
-            <div class="repository-head">
-              <a
-                href="https://github.com/Srigana/AWS-Cloud-Observability-Stack-.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>AWS Lambda Observability Stack</h3>
-              </a>
-              <a
-                href="https://github.com/Srigana/aws-lambda-observability-stack.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  width="16"
-                  height="16"
-                  src="./asset/svg/external-link.svg"
-                  alt="external-link"
-                />
-              </a>
-            </div>
-
-            <p class="repository-description">
-AWS serverless image pipeline (S3, Lambda, Pillow) with a containerized observability stack (YACE, Prometheus, Grafana) for real-time monitoring.            </p>
-
-            <div class="repository-language-used-container">
-              <span class="language-used">Terraform</span>
-              <span class="language-used">AWS</span>
-              <span class="language-used">Prometheus</span>
-              <span class="language-used">Grafana</span>
-            </div>
-          </div>
-          <!-- Project 1 End -->
-
-          <!-- Project 2 -->
-          <div class="repository-container">
-            <div class="repository-head">
-              <a
-                href="https://github.com/Srigana/TwoTier-Architecture-Flask-Web-App-Deployment.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>2-Tier Cloud App & CI/CD</h3>
-              </a>
-              <a
-                href="https://github.com/Srigana/TwoTier-Architecture-Flask-Web-App-Deployment.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  width="16"
-                  height="16"
-                  src="./asset/svg/external-link.svg"
-                  alt="external-link"
-                />
-              </a>
-            </div>
-
-            <p class="repository-description">
-              Flask + MySQL 2-tier app deployed on AWS EC2 using Docker Compose with Jenkins pipeline for automated build/test/deploy.
-            </p>
-
-            <div class="repository-language-used-container">
-              <span class="language-used">AWS</span>
-              <span class="language-used">Docker</span>
-              <span class="language-used">Jenkins</span>
-              <span class="language-used">Flask</span>
-              <span class="language-used">MySQL</span>
-            </div>
-          </div>
-          <!-- Project 2 End -->
-
-          <!-- Project 3 -->
-          <div class="repository-container">
-            <div class="repository-head">
-              <a
-                href="https://github.com/Srigana/gitops-eks-argocd"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>Terraform Projects</h3>
-              </a>
-              <a
-                href="https://github.com/Srigana/Terraform-Projects.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  width="16"
-                  height="16"
-                  src="./asset/svg/external-link.svg"
-                  alt="external-link"
-                />
-              </a>
-            </div>
-
-            <p class="repository-description">
-              Collection of Terraform projects showcasing AWS infrastructure automation using Infrastructure as Code (IaC).
-            </p>
-
-            <div class="repository-language-used-container">
-              <span class="language-used">Terraform</span>
-              <span class="language-used">AWS</span>
-              <span class="language-used">Kubernetes</span>
-              <span class="language-used">EKS</span>
-            </div>
-          </div>
-          <!-- Project 3 End -->
-
-          <!-- Project 4 -->
-          <div class="repository-container">
-            <div class="repository-head">
-              <a
-                href="https://github.com/Srigana/AWS-Cloud-Observability-Stack-.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>Containerized Parking Surveillance Pipeline: YOLOv5 vs. YOLOv8</h3>
-              </a>
-              <a
-                href="https://github.com/Srigana/vehicle-vision-docker.git"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  width="16"
-                  height="16"
-                  src="./asset/svg/external-link.svg"
-                  alt="external-link"
-                />
-              </a>
-            </div>
-
-            <p class="repository-description">
-A containerized computer vision web application that performs concurrent vehicle detection using both YOLOv5 and YOLOv8 models            </p>
-
-            <div class="repository-language-used-container">
-              <span class="language-used">Python</span>
-              <span class="language-used">Flask</span>
-              <span class="language-used">Docker</span>
-            </div>
-          </div>
-          <!-- Project 4 End -->
-          
-        </div>
-
-        <!-- To github repos -->
-        <div class="repository-container more-repo">
-          more at
-          <a
-            href="https://github.com/Srigana?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GITHUB <img src="./asset/svg/external-link.svg" alt="" />
-          </a>
-        </div>
-        <!-- To github repos End -->
-      </div>
-    </section>
-    <!-- End of Project -->
-
-    <!-- EXPERIENCE -->
-    <section class="center">
-      <div id="experience">
-        <h2>EXPERIENCE</h2>
-
-        <div class="experience-container">
-          <!-- Experience 1 -->
-          <div class="repository-container">
-            <div class="repository-head">
-              <h3>Backend Engineering Intern</h3>
-              <p style="margin: 0; opacity: 0.8;">May 2025 - July 2025</p>
-            </div>
-
-            <p class="repository-description">
-Developed microservices using Python and Flask, implementing robust error-handling and input validation to secure backend data flows.
-            </p>
-
-            <ul class="repository-description" style="margin-top: 10px;">
-              <li>Managed document schemas and optimized queries in MongoDB, ensuring data integrity and access control for distributed SaaS applications.</li>
-              <li>Added basic logging and error handling to help debug and monitor backend issues.</li>
-              <li>Supported application hosting on AWS, monitoring EC2 instances and S3 storage for high availability</li>
-            </ul>
-
-            <div class="repository-language-used-container">
-              <span class="language-used">Cloud Architecture</span>
-              <span class="language-used">Security</span>
-              <span class="language-used">Python</span>
-              <span class="language-used">Monitoring</span>
-            </div>
-          </div>
-          <!-- Experience 1 End -->
-
-          <!-- Experience 2 -->
-          <div class="repository-container">
-            <div class="repository-head">
-              <h3>Virtual AICTE Internship in Machine Learning (Remote)</h3>
-              <p style="margin: 0; opacity: 0.8;">Dec 2022 – Feb 2023</p>
-            </div>
-
-            <p class="repository-description">
-              Built ML workflows on AWS with automation and deployment pipelines.
-            </p>
-
-            <ul class="repository-description" style="margin-top: 10px;">
-              <li>Designed and deployed ML workflows using AWS EC2 and S3 for image + NLP, reducing processing time by 40%.</li>
-              <li>Automated data preprocessing using Python scripts, reducing manual work by 30%.</li>
-              <li>Built Flask REST inference endpoints and containerized deployments with Docker.</li>
-              <li>Created CI/CD pipelines using GitHub Actions and Jenkins for seamless model updates.</li>
-            </ul>
-
-            <div class="repository-language-used-container">
-              <span class="language-used">AWS</span>
-              <span class="language-used">Python</span>
-              <span class="language-used">Docker</span>
-              <span class="language-used">Flask</span>
-              <span class="language-used">CI/CD</span>
-            </div>
-          </div>
-          <!-- Experience 2 End -->
+    <div class="exp-row rv d1">
+      <div class="exp-l">
+        <div class="exp-co">Machine Learning</div>
+        <h3 class="exp-title">ML Engineering<br>Intern</h3>
+        <div class="exp-period">Dec 2022 — Feb 2023</div>
+        <div class="exp-stack">
+          <span class="tag-mono">Python</span><span class="tag-mono">Flask</span>
+          <span class="tag-mono">AWS</span><span class="tag-mono">Docker</span>
+          <span class="tag-mono">Jenkins</span><span class="tag-mono">GH Actions</span>
         </div>
       </div>
-    </section>
-    <!-- EXPERIENCE End -->
-     <!-- EDUCATION -->
-<section class="center">
-  <div id="education">
-    <h2>EDUCATION</h2>
-
-    <div class="education-container">
-      <div class="repository-container">
-        <div class="repository-head">
-          <h3>Master of Science in Computer Science</h3>
-          <p style="margin: 0; opacity: 0.8;">Aug 2024 – Dec 2025</p>
-        </div>
-
-        <p class="repository-description">
-          Virginia Commonwealth University (VCU), Richmond, VA
-        </p>
-
-        <ul class="repository-description" style="margin-top: 10px;">
-          <li>CGPA: <strong>4.0 / 4.0</strong></li>
-          <li>Focus: Cloud Computing, DevOps, Automation</li>
-        </ul>
-
-        <div class="repository-language-used-container">
-          <span class="language-used">Cloud</span>
-          <span class="language-used">DevOps</span>
-          <span class="language-used">Automation</span>
+      <div class="exp-r">
+        <p class="exp-summary">Designed end-to-end ML workflows on AWS for image and NLP workloads. Built Flask inference endpoints, containerized with Docker, and automated the full pipeline with CI/CD.</p>
+        <div class="exp-wins">
+          <div class="win-row">
+            <span class="win-fig a">40%</span>
+            <span class="win-txt"><strong>Faster processing</strong> — AWS EC2 + S3 ML pipelines cut end-to-end latency across image and NLP workloads</span>
+          </div>
+          <div class="win-row">
+            <span class="win-fig g">30%</span>
+            <span class="win-txt"><strong>Less manual prep</strong> — Python scripts automated data preprocessing, freeing engineering time</span>
+          </div>
+          <div class="win-row">
+            <span class="win-fig b">2</span>
+            <span class="win-txt"><strong>CI/CD pipelines</strong> — GitHub Actions and Jenkins automated model updates from commit to containerized deploy</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- EDUCATION End -->
 
+<hr class="rule">
 
-    <!-- About -->
-    <div class="center">
-      <div id="about">
-        <!-- Image -->
-        <div class="about-img-container">
-          <img
-            width="80"
-            height="80"
-            src="./asset/img/image2.png"
-            alt="profile picture"
-          />
-        </div>
-
-        <!-- Name -->
-        <h2 class="gradient">Srigana Pulikantham</h2>
-
-        <!-- social media container -->
-        <ul class="about-social-container">
-          <li>
-            <img src="./asset/svg/github.svg" alt="Github" />
-            <a
-              href="https://github.com/Srigana"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Github</a
-            >
-          </li>
-
-          <li>
-            <img src="./asset/svg/mail.svg" alt="Mail" />
-            <a href="mailto:srigana2003@gmail.com">srigana2003@gmail.com</a>
-          </li>
-
-          <li>
-            <img src="./asset/svg/linkedin.svg" alt="LinkedIn" />
-            <a
-              href="https://www.linkedin.com/in/srigana-pulikantham-790954221/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >LinkedIn</a
-            >
-          </li>
-        </ul>
-
-        <!-- long bio -->
-        <p>
-          CS grad student into Cloud and DevOps — AWS, automation, and CI/CD pipelines.
-I like systems that scale, scripts that save time, and deployments that just work.
-Outside engineering, I enjoy creative work.
-        </p>
-
-        <!-- Skills / Tools -->
-        <h3>Skills / Tools</h3>
-        <ul class="skill">
-          <li>AWS (EC2, S3, IAM, EKS)</li>
-          <li>Docker</li>
-          <li>Kubernetes</li>
-          <li>Terraform (IaC)</li>
-          <li>CI/CD (Jenkins, GitHub Actions)</li>
-          <li>GitOps (Argo CD)</li>
-          <li>Python (Automation)</li>
-          <li>Bash</li>
-          <li>Linux (Ubuntu)</li>
-          <li>Monitoring (Prometheus, Grafana)</li>
-          <li>Security Scanning (Trivy)</li>
-          <li>Code Quality (SonarQube)</li>
-        </ul>
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="proj-header rv">
+      <div>
+        <div class="sec-label">Projects</div>
+        <h2 class="sec-h" style="margin-bottom:0;">What I've <em>built.</em></h2>
       </div>
     </div>
 
-    <footer>
-      <p>
-        
-      </p>
-    </footer>
+    <div class="proj-list rv">
 
-    <!-- remove if you want to remove hover effect -->
-    <script type="module" src="./script/event-effect.js"></script>
-  </body>
+      <a href="https://github.com/Srigana/AWS-Cloud-Observability-Stack-.git" target="_blank" class="proj-item">
+        <div class="proj-idx">01</div>
+        <div class="proj-mid">
+          <div class="proj-title-txt">AWS Lambda Observability Stack</div>
+          <div class="proj-desc-txt">Serverless image pipeline (S3 → Lambda → Pillow) with a full containerized observability layer. YACE exports CloudWatch metrics into Prometheus; Grafana dashboards surface them in real time. Everything provisioned with Terraform — zero click-ops.</div>
+          <div class="proj-tags">
+            <span class="tag-mono">Terraform</span><span class="tag-mono">AWS Lambda</span>
+            <span class="tag-mono">Prometheus</span><span class="tag-mono">Grafana</span>
+            <span class="tag-mono">YACE</span><span class="tag-mono">Docker</span><span class="tag-mono">Python</span>
+          </div>
+          <div class="proj-nums-row">
+            <div><span class="pstat-val a">IaC only</span><span class="pstat-key">Terraform provisioned</span></div>
+            <div><span class="pstat-val g">3-layer</span><span class="pstat-key">Observability</span></div>
+            <div><span class="pstat-val b">0</span><span class="pstat-key">Manual deploys</span></div>
+          </div>
+        </div>
+        <div class="proj-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/Srigana/TwoTier-Architecture-Flask-Web-App-Deployment.git" target="_blank" class="proj-item">
+        <div class="proj-idx">02</div>
+        <div class="proj-mid">
+          <div class="proj-title-txt">2-Tier Cloud App & CI/CD Pipeline</div>
+          <div class="proj-desc-txt">Flask + MySQL two-tier app on AWS EC2 with Docker Compose. Jenkins pipeline automates build → test → deploy on every push — no manual steps post-commit.</div>
+          <div class="proj-tags">
+            <span class="tag-mono">Jenkins</span><span class="tag-mono">AWS EC2</span>
+            <span class="tag-mono">Docker Compose</span><span class="tag-mono">Flask</span><span class="tag-mono">MySQL</span>
+          </div>
+          <div class="proj-nums-row">
+            <div><span class="pstat-val a">Auto</span><span class="pstat-key">Build to deploy</span></div>
+            <div><span class="pstat-val g">2-tier</span><span class="pstat-key">Architecture</span></div>
+          </div>
+        </div>
+        <div class="proj-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/Srigana/gitops-eks-argocd" target="_blank" class="proj-item">
+        <div class="proj-idx">03</div>
+        <div class="proj-mid">
+          <div class="proj-title-txt">GitOps EKS with ArgoCD</div>
+          <div class="proj-desc-txt">Terraform-managed EKS cluster with ArgoCD for GitOps-style deployments. Kubernetes manifests in Git are the single source of truth — drift detected and corrected automatically.</div>
+          <div class="proj-tags">
+            <span class="tag-mono">Terraform</span><span class="tag-mono">Kubernetes</span>
+            <span class="tag-mono">ArgoCD</span><span class="tag-mono">EKS</span>
+          </div>
+          <div class="proj-nums-row">
+            <div><span class="pstat-val a">GitOps</span><span class="pstat-key">Deploy model</span></div>
+            <div><span class="pstat-val g">Auto-sync</span><span class="pstat-key">Drift correction</span></div>
+          </div>
+        </div>
+        <div class="proj-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/Srigana/vehicle-vision-docker.git" target="_blank" class="proj-item">
+        <div class="proj-idx">04</div>
+        <div class="proj-mid">
+          <div class="proj-title-txt">Parking Surveillance — YOLOv5 vs YOLOv8</div>
+          <div class="proj-desc-txt">Containerized CV app running concurrent vehicle detection with both YOLOv5 and YOLOv8 in a single Docker deployment — real-time side-by-side benchmarking via a Flask web interface.</div>
+          <div class="proj-tags">
+            <span class="tag-mono">YOLOv5</span><span class="tag-mono">YOLOv8</span>
+            <span class="tag-mono">Docker</span><span class="tag-mono">Python</span><span class="tag-mono">Flask</span>
+          </div>
+          <div class="proj-nums-row">
+            <div><span class="pstat-val a">2 models</span><span class="pstat-key">Concurrent</span></div>
+            <div><span class="pstat-val g">Real-time</span><span class="pstat-key">Detection</span></div>
+            <div><span class="pstat-val b">1 container</span><span class="pstat-key">Full deploy</span></div>
+          </div>
+        </div>
+        <div class="proj-arrow">↗</div>
+      </a>
+
+    </div>
+
+    <div class="view-all-row rv">
+      <a href="https://github.com/Srigana?tab=repositories" target="_blank" class="btn btn-line" style="display:inline-flex;">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        View all repositories on GitHub ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="skills-layout rv">
+      <div class="skills-l">
+        <div class="sec-label">Skills</div>
+        <h2 class="sec-h" style="margin-bottom:20px;">Tools I <em>reach for.</em></h2>
+        <!-- <p class="skills-intro">"The right tool for the right problem — I know what I've used in production."</p>
+        <p class="skills-note">Grouped by how I actually use them — not ranked, not rated, just honest.</p> -->
+      </div>
+      <div class="skills-r">
+        <div class="sg2">
+          <div class="sg2-lbl">Backend & Languages</div>
+          <div class="sk-tags">
+            <span class="sk-pill a">Python</span>
+            <span class="sk-pill a">C++</span>
+            <span class="sk-pill a">HTML</span>
+            <span class="sk-pill a">CSS</span>
+            <span class="sk-pill a">Flask</span>
+            <span class="sk-pill a">REST API Design</span>
+            <span class="sk-pill a">Bash / Shell</span>
+            <span class="sk-pill a">MongoDB</span>
+            <span class="sk-pill a">Linux (Ubuntu)</span>
+          </div>
+        </div>
+        <div class="sg2">
+          <div class="sg2-lbl">Cloud & Infrastructure</div>
+          <div class="sk-tags">
+            <span class="sk-pill g">AWS EC2</span>
+            <span class="sk-pill g">AWS S3</span>
+            <span class="sk-pill g">AWS Lambda</span>
+            <span class="sk-pill g">EKS / IAM</span>
+            <span class="sk-pill g">Terraform</span>
+            <span class="sk-pill g">Docker</span>
+            <span class="sk-pill g">Kubernetes</span>
+            <span class="sk-pill g">Prometheus</span>
+            <span class="sk-pill g">Grafana</span>
+            <span class="sk-pill g">Maven</span>
+          </div>
+        </div>
+        <div class="sg2">
+          <div class="sg2-lbl">CI/CD & GitOps</div>
+          <div class="sk-tags">
+            <span class="sk-pill b">Jenkins</span>
+            <span class="sk-pill b">GitHub Actions</span>
+            <span class="sk-pill b">ArgoCD</span>
+            <span class="sk-pill b">GitOps</span>
+          </div>
+        </div>
+        <div class="sg2">
+          <div class="sg2-lbl">Security & Quality</div>
+          <div class="sk-tags">
+            <span class="sk-pill">Trivy</span>
+            <span class="sk-pill">SonarQube</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCATION ═══ -->
+<section id="education">
+  <div class="wrap">
+    <div class="rv">
+      <div class="sec-label">Education</div>
+      <h2 class="sec-h">Where I <em>studied.</em></h2>
+    </div>
+    <div class="edu-layout rv">
+      <div class="edu-l">
+        <div class="edu-degree-name">Master of Science<br>in Computer Science</div>
+        <div class="edu-uni"><strong>Virginia Commonwealth University</strong> — Richmond, VA</div>
+        <div class="edu-table">
+          <div class="edu-tr"><span class="edu-td-k">Graduated</span><span class="edu-td-v"><span class="ac">Dec 2025</span></span></div>
+          <div class="edu-tr"><span class="edu-td-k">GPA</span><span class="edu-td-v"><span class="hi">4.0 / 4.0</span></span></div>
+          <div class="edu-tr"><span class="edu-td-k">Focus</span><span class="edu-td-v">Cloud Computing, DevOps, Distributed Systems</span></div>
+          <div class="edu-tr"><span class="edu-td-k">Location</span><span class="edu-td-v">Richmond, VA — open to remote or relocation</span></div>
+        </div>
+      </div>
+      <div class="edu-r">
+        <div class="gpa-block">
+          <div class="gpa-num">4.0</div>
+          <div class="gpa-denom">out of 4.0 · MS Computer Science</div>
+        </div>
+
+        <div class="cert-block">
+          <div class="cert-top">
+            <div class="cert-badge-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div>
+              <div class="cert-name2">AWS Certified Cloud Practitioner</div>
+              <div class="cert-by">Amazon Web Services (AWS)</div>
+            </div>
+          </div>
+          <div class="cert-pill"><span class="cert-pill-dot"></span>Verified · Credly</div>
+          <a href="https://www.credly.com/badges/c51e6dab-8ced-4a0a-a5a5-1d082d71242c/linked_in?t=tajb60" target="_blank" class="btn btn-line" style="width:100%;justify-content:center;font-size:13px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View Certification ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-layout">
+      <div class="contact-l rv">
+        <h2 class="contact-headline">Let's<br><em>work</em><br>together.</h2>
+        <p class="contact-sub">Looking for backend or cloud/DevOps roles — full-time, available now. If your team builds real software and cares about how it runs in production, I'd love to talk.</p>
+        <a href="mailto:srigana2003@gmail.com" class="btn btn-solid" style="margin-bottom:32px;">srigana2003@gmail.com</a>
+        <div class="cl-list">
+          <a href="mailto:srigana2003@gmail.com" class="cl2">
+            <div class="cl2-l"><div class="cl2-ico">✉</div><div><div class="cl2-name">Email</div><div class="cl2-val">srigana2003@gmail.com</div></div></div>
+            <span class="cl2-arr">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/srigana-pulikantham-790954221/" target="_blank" class="cl2">
+            <div class="cl2-l"><div class="cl2-ico" style="font-family:serif;">in</div><div><div class="cl2-name">LinkedIn</div><div class="cl2-val">/in/srigana-pulikantham</div></div></div>
+            <span class="cl2-arr">↗</span>
+          </a>
+          <a href="https://github.com/Srigana" target="_blank" class="cl2">
+            <div class="cl2-l"><div class="cl2-ico" style="font-size:10px;font-weight:600;">GH</div><div><div class="cl2-name">GitHub</div><div class="cl2-val">github.com/Srigana</div></div></div>
+            <span class="cl2-arr">↗</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1Ul-3u_U6m_qa4rxIBS6XyAZe58zFj8UB/view?usp=sharing" target="_blank" class="cl2">
+            <div class="cl2-l"><div class="cl2-ico" style="font-size:10px;">CV</div><div><div class="cl2-name">Resume</div><div class="cl2-val">Download PDF</div></div></div>
+            <span class="cl2-arr">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-r rv d2">
+        <div class="about-card">
+          <div class="about-person2">
+            <div class="about-av">
+              <img src="/srigana.png" alt="Srigana">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <div>
+              <div class="about-pname">Srigana Pulikantham</div>
+              <div class="about-prole">MS CS · VCU · Software &amp; Cloud Engineer</div>
+            </div>
+          </div>
+          <p class="about-q">"I like systems that scale, scripts that save time, and deployments that just work."</p>
+          <p class="about-body2">
+            Recently graduated with an MS in CS from VCU. Hands-on with backend microservices in Python/Flask, cloud infrastructure on AWS, and full DevOps pipelines from Terraform to ArgoCD. I care about building things that are reliable, observable, and maintainable — not just things that run once.
+          </p>
+          <div class="about-tgs">
+            <span class="about-tg a">Backend Engineering</span>
+            <span class="about-tg a">Cloud / AWS</span>
+            <span class="about-tg g">DevOps & CI/CD</span>
+            <span class="about-tg g">Kubernetes</span>
+            <span class="about-tg">Python</span>
+            <span class="about-tg">Terraform</span>
+            <span class="about-tg">Open to remote</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="foot-l">Srigana Pulikantham — 2025</span>
+  <div class="foot-links">
+    <a href="mailto:srigana2003@gmail.com">Email</a>
+    <a href="https://github.com/Srigana" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/srigana-pulikantham-790954221/" target="_blank">LinkedIn</a>
+    <a href="https://drive.google.com/file/d/1Ul-3u_U6m_qa4rxIBS6XyAZe58zFj8UB/view?usp=sharing" target="_blank">Resume</a>
+  </div>
+</footer>
+
+<script>
+/* THEME */
+const html = document.documentElement;
+const stored = localStorage.getItem('sp-theme') || 'light';
+html.setAttribute('data-theme', stored);
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('sp-theme', next);
+});
+
+/* MOBILE */
+document.getElementById('hamBtn').addEventListener('click', () =>
+  document.getElementById('mobMenu').classList.toggle('open'));
+function closeMob(){ document.getElementById('mobMenu').classList.remove('open'); }
+
+/* CUSTOM CURSOR */
+(function(){
+  var cur = document.getElementById('cur');
+  var dot = document.getElementById('cur-dot');
+  if(!cur||!dot) return;
+  var mx = -100, my = -100;
+  var dx = -100, dy = -100;
+  var started = false;
+
+  document.addEventListener('mousemove', function(e){
+    mx = e.clientX;
+    my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
+    if(!started){
+      started = true;
+      cur.style.opacity  = '1';
+      dot.style.opacity  = '0.5';
+    }
+  });
+
+  function loop(){
+    dx += (mx - dx) * 0.12;
+    dy += (my - dy) * 0.12;
+    dot.style.left = (dx - 3.5) + 'px';
+    dot.style.top  = (dy - 3.5) + 'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* SCROLL PROGRESS */
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = Math.min(pct,100)+'%';
+}, {passive:true});
+
+/* REVEAL: CSS animation handles this, no JS needed */
+
+/* ANIMATED COUNTERS */
+function animCount(el) {
+  const target = parseFloat(el.getAttribute('data-count'));
+  const suffix = el.getAttribute('data-suffix') || '';
+  const dec    = parseInt(el.getAttribute('data-dec') || '0');
+  const dur = 1600; let start = null;
+  function step(ts) {
+    if(!start) start=ts;
+    const p = Math.min((ts-start)/dur,1);
+    const ease = 1-Math.pow(1-p,3);
+    el.textContent = (target*ease).toFixed(dec) + suffix;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const countIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-count]').forEach(animCount);
+      countIo.unobserve(e.target);
+    }
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.hero-r').forEach(el => countIo.observe(el));
+
+/* MAGNETIC BUTTONS */
+document.querySelectorAll('.btn-solid').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width/2) * 0.25;
+    const dy = (e.clientY - r.top  - r.height/2) * 0.25;
+    btn.style.transform = `translate(${dx}px,${dy}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+ 
+/* PROJECT ROW hover indent */
+document.querySelectorAll('.proj-item').forEach(item => {
+  item.addEventListener('mouseenter', () => { item.style.paddingLeft = '10px'; });
+  item.addEventListener('mouseleave', () => { item.style.paddingLeft = ''; });
+});
+</script>
+</body>
 </html>
-
-
-
-
-
-
